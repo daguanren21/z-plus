@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "z-plus",
   "type": "module",
   "version": "0.0.0",
   "description": "vue lib vite lib mode template",
@@ -44,6 +44,9 @@
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts"
   },
+  "dependencies": {
+    "es-toolkit": "^1.39.8"
+  },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/test-utils": "^2.4.6",
@@ -53,8 +56,5 @@
     "vite-plugin-dts": "^4.5.4",
     "vue": "^3.5.17",
     "vue-tsc": "^3.0.1"
-  },
-  "dependencies": {
-    "es-toolkit": "^1.39.8"
   }
 }

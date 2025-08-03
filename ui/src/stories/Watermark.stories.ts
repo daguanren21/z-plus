@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { ZWatermark } from '../../lib/index'
 
 const meta = {
-  title: 'Example/Page',
+  title: '水印组件',
   component: ZWatermark,
   render: () => ({
     components: { ZWatermark },

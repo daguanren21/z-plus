@@ -1,10 +1,16 @@
-import { mount } from '@vue/test-utils'
-import { ZWatermark } from '../lib'
+import type { Meta, StoryObj } from '@storybook/vue3-vite'
 
-vi.useFakeTimers()
-it('zWatermark', async () => {
-  const wrapper = mount({
-    template: `<z-watermark :content="content" > <div style="height: 800px;">
+import { ZWatermark } from '../../lib/index'
+
+const meta = {
+  title: 'Example/Page',
+  component: ZWatermark,
+  render: () => ({
+    components: { ZWatermark },
+    template: `<ZWatermark
+    :content="['测试水印', 'zhangqihui']"
+  >
+    <div style="height: 800px;">
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
@@ -12,15 +18,17 @@ it('zWatermark', async () => {
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
-    </div></z-watermark>`,
-    components: {
-      ZWatermark,
-    },
-    props: {
-      content: '测试水印',
-    },
-  })
-  await wrapper.vm.$nextTick()
-  vi.advanceTimersByTime(2000)
-  expect(wrapper.html()).toMatchInlineSnapshot()
-})
+    </div>
+  </ZWatermark>`,
+  }),
+  parameters: {
+  },
+  tags: ['autodocs'],
+} satisfies Meta<typeof ZWatermark>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const basic: Story = {
+
+}

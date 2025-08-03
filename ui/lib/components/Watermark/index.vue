@@ -4,8 +4,17 @@ import { computed, onMounted, useTemplateRef, watchEffect } from 'vue'
 import useWatermark from './useWatermark'
 
 export interface ZWatermarkProps {
+  /**
+   * Custom styles for the watermark container
+   */
   style?: CSSProperties
+  /**
+   * The z-index of the watermark, defaults to 1000
+   */
   zIndex?: string | number
+  /**
+   * The width and height of the watermark, defaults to 200
+   */
   width?: number
   height?: number
   rotate?: number

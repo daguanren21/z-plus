@@ -16,7 +16,7 @@ export default mergeConfig(sharedConfig, {
   build: {
     lib: {
       entry: path.resolve(import.meta.dirname, 'lib/index'),
-      name: 'icebreaker',
+      name: 'daguaren21',
       // the proper extensions will be added
       fileName: 'index',
     },

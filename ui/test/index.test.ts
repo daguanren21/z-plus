@@ -1,26 +1,61 @@
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+import { h } from 'vue'
 import { ZWatermark } from '../lib'
 
-vi.useFakeTimers()
-it('zWatermark', async () => {
-  const wrapper = mount({
-    template: `<z-watermark :content="content" > <div style="height: 800px;">
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos recusandae minus, eaque, harum exercitationem esse sapiente? Eveniet, id provident!</p>
-    </div></z-watermark>`,
-    components: {
-      ZWatermark,
-    },
-    props: {
-      content: '测试水印',
-    },
+const AXIOM = 'Rem is the best girl'
+
+describe('watermark.vue', () => {
+  it('create', () => {
+    const wrapper = mount(() =>
+      h(ZWatermark, { class: 'watermark' }, () => AXIOM),
+    )
+
+    expect(wrapper.classes()).toContain('watermark')
+    expect(wrapper.html()).toMatchSnapshot()
   })
-  await wrapper.vm.$nextTick()
-  vi.advanceTimersByTime(2000)
-  expect(wrapper.html()).toMatchInlineSnapshot()
+  it('content props', () => {
+    const wrapper = mount(() =>
+      h(ZWatermark, {
+        class: 'watermark',
+        content: ['水印测试', 'zhangqihui'],
+        rotate: -30,
+        getContainer: () => document.createElement('div'),
+      }, () => AXIOM),
+    )
+
+    expect(wrapper.html()).toMatchInlineSnapshot(`"<div class="watermark">Rem is the best girl</div>"`)
+  })
+  it('image props', () => {
+    const wrapper = mount(() =>
+      h(ZWatermark, {
+        class: 'watermark',
+        width: 200,
+        height: 200,
+        image: 'https://www.baidu.com/img/flexible/logo/pc/result@2.png',
+        getContainer: () => document.createElement('div'),
+      }, () => AXIOM),
+    )
+
+    expect(wrapper.html()).toMatchInlineSnapshot(`"<div class="watermark">Rem is the best girl</div>"`)
+  })
+  it('container empty', () => {
+    const wrapper = mount(() =>
+      h(ZWatermark, {
+        class: 'watermark',
+        style: { display: 'none' },
+        // @ts-expect-error
+        getContainer: () => null,
+      }, () => AXIOM),
+    )
+
+    expect(wrapper.text()).toContain(AXIOM)
+  })
+  it('slots', () => {
+    const wrapper = mount(() =>
+      h(ZWatermark, null, () => AXIOM),
+    )
+
+    expect(wrapper.text()).toContain(AXIOM)
+  })
 })

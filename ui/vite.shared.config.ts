@@ -1,4 +1,5 @@
 import vue from '@vitejs/plugin-vue'
+import VueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'pathe'
 // https://vite.dev/guide/build.html#library-mode
 import { defineConfig } from 'vite'
@@ -12,5 +13,6 @@ export const sharedConfig = defineConfig({
   },
   plugins: [
     vue(),
+    VueJsx(),
   ],
 })

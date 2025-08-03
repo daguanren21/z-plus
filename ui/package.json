@@ -49,6 +49,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@vitejs/plugin-vue-jsx": "^5.0.1",
     "es-toolkit": "^1.39.8"
   },
   "devDependencies": {

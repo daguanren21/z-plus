@@ -8,7 +8,7 @@ const defaultOptions = {
   rotate: -20,
   zIndex: 1,
   width: 100,
-  gap: [100, 100],
+  gap: [100, 100] as number[ ],
   fontStyle: {
     fontSize: '16px',
     color: 'rgba(0, 0, 0, 0.15)',

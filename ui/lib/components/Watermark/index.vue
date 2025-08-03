@@ -26,8 +26,8 @@ export interface ZWatermarkProps {
     fontSize?: number | string
     fontWeight?: number | string
   }
-  gap?: [number, number]
-  offset?: [number, number]
+  gap?: number[]
+  offset?: number[]
   getContainer?: () => HTMLElement
 }
 </script>

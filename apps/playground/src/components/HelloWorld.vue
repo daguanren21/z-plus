@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ZWatermark } from '../lib/components/Watermark'
+import { ZWatermark } from '@daguanren21/z-plus'
 </script>
 
 <template>

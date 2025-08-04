@@ -1,12 +1,14 @@
 <script  lang="ts">
-import type { CSSProperties, VNode } from 'vue'
+import type { VNode } from 'vue'
 import { provide } from 'vue'
 import { useMessageConfig } from './message'
 
 export type Position = 'top' | 'bottom'
 
+export type MessageStyle = Record<string, string | number | undefined>
+
 export interface MessageProps {
-  style?: CSSProperties
+  style?: MessageStyle
   className?: string | string[]
   content: VNode | string
   duration?: number

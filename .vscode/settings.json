@@ -165,5 +165,11 @@
     "npm_config_sharp_binary_host": "https://cdn.npmmirror.com/binaries/sharp",
     "npm_config_sharp_libvips_binary_host": "https://cdn.npmmirror.com/binaries/sharp-libvips",
     "npm_config_robotjs_binary_host": "https://cdn.npmmirror.com/binaries/robotjs"
-  }
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#282A4F",
+    "titleBar.activeBackground": "#383A6F",
+    "titleBar.activeForeground": "#FBFBFD"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

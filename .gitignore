@@ -36,3 +36,6 @@ dist
 vite.config.ts.timestamp-*.mjs
 *storybook.log
 storybook-static
+
+# snapshot
+*.test.ts.snap

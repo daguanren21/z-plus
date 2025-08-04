@@ -1,7 +1,7 @@
 import type { MessageProps, Position } from '.'
 import { getCurrentInstance, inject, onMounted, onUnmounted, ref, useId } from 'vue'
 
-interface MessageList {
+export interface MessageList {
   top: MessageProps[]
   bottom: MessageProps[]
 }
@@ -29,7 +29,15 @@ export function findMessage(messageList: MessageList, id: number) {
     index,
   }
 }
-export function useMessageConfig(defaultPosition: Position) {
+export interface MessageConfig {
+  messageList: import('vue').Ref<MessageList>
+  add: (messageProps: MessageProps) => string
+  update: (id: number, messageProps: MessageProps) => void
+  remove: (id: number) => void
+  clearAll: () => void
+}
+
+export function useMessageConfig(defaultPosition: Position): MessageConfig {
   const messageList = ref<MessageList>({ ...initialState })
   const id = useId()
 
@@ -78,7 +86,6 @@ export function useMessageConfig(defaultPosition: Position) {
     },
   }
 }
-export type MessageConfig = ReturnType<typeof useMessageConfig>
 export function useMessage(): MessageConfig {
   const vm = getCurrentInstance()
   const context = inject('messageConfig') as MessageConfig

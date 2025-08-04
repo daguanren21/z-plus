@@ -6,5 +6,6 @@ export default mergeConfig(sharedConfig, {
     globals: true,
     testTimeout: 60_000,
     environment: 'jsdom',
+    setupFiles: ['./test/setup.ts'],
   },
 })

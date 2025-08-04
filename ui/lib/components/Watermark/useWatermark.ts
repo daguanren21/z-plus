@@ -21,8 +21,20 @@ const defaultOptions = {
 function getMergedOptions(o: Partial<WatermarkOptions>) {
   const options = o || {}
 
+  // to array
+  const normalizeContent = (content: string | string[] | undefined): string[] => {
+    if (!content) {
+      return ['']
+    }
+    if (typeof content === 'string') {
+      return [content]
+    }
+    return content
+  }
+
   const mergedOptions = {
     ...options,
+    content: normalizeContent(options.content),
     rotate: options.rotate || defaultOptions.rotate,
     zIndex: options.zIndex || defaultOptions.zIndex,
     fontStyle: { ...defaultOptions.fontStyle, ...options.fontStyle },
@@ -77,7 +89,8 @@ function measureTextSize(ctx: CanvasRenderingContext2D, content: string[], rotat
 function getCanvasData(
   options: Required<WatermarkOptions>,
 ): Promise<{ width: number, height: number, base64Url: string }> {
-  const { rotate, image, content, fontStyle, gap } = options
+  const { rotate, image, fontStyle, gap } = options
+  const content = options.content as string[]
 
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')!
@@ -131,7 +144,7 @@ function getCanvasData(
     const realFontSize = toNumber(fontSize || 0) || fontStyle.fontSize
 
     ctx.font = `${fontWeight} ${realFontSize}px ${fontFamily}`
-    const measureSize = measureTextSize(ctx, [...content], rotate)
+    const measureSize = measureTextSize(ctx, content, rotate)
 
     const width = options.width || measureSize.width
     const height = options.height || measureSize.height
@@ -140,9 +153,9 @@ function getCanvasData(
 
     ctx.fillStyle = color!
     ctx.font = `${fontWeight} ${realFontSize}px ${fontFamily}`
-    ctx.textBaseline = 'top';
+    ctx.textBaseline = 'top'
 
-    [...content].forEach((item, index) => {
+    content.forEach((item, index) => {
       const { height: lineHeight, width: lineWidth } = measureSize.lineSize[index]
 
       const xStartPoint = -lineWidth / 2
